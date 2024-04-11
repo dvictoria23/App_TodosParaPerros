@@ -8,7 +8,7 @@
     tools:context=".presentation.LogInActivity">
 
     <TextView
-        android:id="@+id/LogIntitle"
+        android:id="@+id/etLogIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -22,12 +22,13 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/etLoginUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/LogIntitle"
-        android:layout_margin="10dp"
-        android:layout_marginTop="111dp"
+        android:layout_below="@id/etLogIn"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/baseline_email_24"
         android:drawablePadding="20dp"
@@ -37,12 +38,12 @@
         android:textColorHint="@color/white" />
 
     <EditText
-        android:id="@+id/etSignUpPassword"
+        android:id="@+id/etLoginPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Email"
+        android:layout_below="@id/etLoginUsername"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:drawableLeft="@drawable/baseline_password_24"
@@ -56,10 +57,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSignUp"
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etSignUpPassword"
+        android:layout_below="@id/etLoginPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/black"
+        android:text="Log in"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLoginSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="85dp"

@@ -39,10 +39,30 @@ public class SignUpActivity extends AppCompatActivity {
                 String rpassword = binding.etRepeatPassword.getText().toString();
 
                 try {
-                    authenticationService.signUp(username, password, rpassword);
+                    authenticationService.signUp(username, password, rpassword, new AuthenticationService.OnSignUpListener() {
+                        @Override
+                        public void OnSignUpSuccess() {
+                            Intent intent = new Intent(
+                                    SignUpActivity.this,
+                                    LoggedInActivity.class
+                            );
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void OnSignUpError(Throwable throwable) {
+                            String errorMessage = throwable.getMessage();
+                            Toast.makeText(
+                                    SignUpActivity.this,
+                                    errorMessage,
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                        }
+                    });
                     Intent intent = new Intent(
                             SignUpActivity.this,
-                            ActivitySignUpBinding.class
+                            LoggedInActivity.class
                     );
                     intent.putExtra("CLIENT_USERNAME", username);
                     startActivity(intent);

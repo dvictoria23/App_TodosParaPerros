@@ -33,7 +33,7 @@ public class AuthenticationService {
    * @param username the username
    * @param enteredPassword the password
    */
-  public Client logIn(String username, String enteredPassword) throws Throwable {
+  public void logIn(String username, String enteredPassword, OnLogInListener listener) throws Throwable {
     if (username.isEmpty())
       throw new Throwable("Username cannot be empty");
     if (enteredPassword.isEmpty())
@@ -45,7 +45,7 @@ public class AuthenticationService {
     if (!client.getPassword().equals(enteredPassword))
       throw new Throwable("Incorrect password");
 
-    return client;
+    listener.OnLogInSuccess(client);
   }
 
   /**
@@ -54,7 +54,7 @@ public class AuthenticationService {
    * @param password the password
    * @param passwordConfirmation the password confirmation
    */
-  public void signUp(String username, String password, String passwordConfirmation) throws Throwable {
+  public void signUp(String username, String password, String passwordConfirmation, OnSignUpListener listener) throws Throwable {
     // EXERCICI 2
     if (username.isEmpty())
       throw new Throwable("Username cannot be empty");
@@ -65,5 +65,6 @@ public class AuthenticationService {
 
     Client client = new Client(username, username, password);
     clients.put(password, client);
+    listener.OnSignUpSuccess();
   }
 }

@@ -37,7 +37,7 @@ public class LogInActivity extends AppCompatActivity {
    * Initialize the listeners of the widgets.
    */
   private void initWidgetListeners() {
-    binding.btnLogIn.setOnClickListener(new View.OnClickListener() {
+    binding.btnLogin.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         /* Get the values of the widgets */
@@ -45,12 +45,32 @@ public class LogInActivity extends AppCompatActivity {
         String password = binding.etLoginPassword.getText().toString();
 
         try {
-          Client client = authenticationService.logIn(username, password);
+          authenticationService.logIn(username, password, new AuthenticationService.OnLogInListener() {
+            @Override
+            public void OnLogInSuccess(Client client) {
+              Intent intent = new Intent(
+                  LogInActivity.this,
+                  LoggedInActivity.class
+              );
+              intent.putExtra("CLIENT_ID", client.getId());
+              startActivity(intent);
+              finish();
+            }
+
+            @Override
+            public void OnLogInError(Throwable throwable) {
+              String errorMessage = throwable.getMessage();
+              Toast.makeText(
+                  LogInActivity.this,
+                  errorMessage,
+                  Toast.LENGTH_SHORT
+              ).show();
+            }
+          });
           Intent intent = new Intent(
               LogInActivity.this,
               LoggedInActivity.class
           );
-          intent.putExtra("CLIENT_ID", client.getId());
           startActivity(intent);
           finish();
         } catch (Throwable throwable) {
@@ -62,12 +82,25 @@ public class LogInActivity extends AppCompatActivity {
           ).show();
         }
       }
+
     });
 
     // EXERCICI 1
     // Afegeix el listener a un botó de sign-up que llenci una nova activitat
     // SignUpActivity.
     // ...
+    binding.btnLoginSignUp.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(
+                LogInActivity.this,
+                SignUpActivity.class);
+        startActivity(intent);
+        finish();
+      }
+    });
+
+
 
   }
 }
